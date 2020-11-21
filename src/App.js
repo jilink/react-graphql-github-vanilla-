@@ -13,6 +13,7 @@ const TITLE = "React GraphQl Github Client";
 const GET_ISSUES_OF_REPOSITORY = `
   query ($organization: String!, $repository: String!){
     organization(login: $organization) {
+      avatarUrl
       name
       url
       repository(name: $repository) {
@@ -101,12 +102,13 @@ const Organization = ({ organization, errors }) => {
     return (
       <p>
         <strong>Something Went Wrong:</strong>
-        {errors.map((error) => error.message).join(" ")}}
+        {errors.map((error) => error.message).join(" ")}
       </p>
     );
   }
   return (
     <div>
+      <img style={{ maxWidth: "75px" }} src={organization.avatarUrl} />
       <p>
         <strong>Issuers from Organization:</strong>
         <a href={organization.url}>{organization.name}</a>
